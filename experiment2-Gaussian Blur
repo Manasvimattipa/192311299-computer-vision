@@ -1,0 +1,11 @@
+
+import cv2
+import numpy as np
+
+img = cv2.imread(r"C:\Users\hp\Downloads\roseflower.png")
+img = cv2.resize(img, (400, 300))
+blur = cv2.GaussianBlur(img, (15, 15), 0)
+result = np.hstack((img, blur))
+cv2.imshow("Original and Blurred Image", result)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
