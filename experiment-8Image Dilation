@@ -1,0 +1,23 @@
+
+import cv2
+import numpy as np
+
+img = np.zeros((300, 300, 3), dtype=np.uint8)
+
+cv2.rectangle(img, (80, 80), (150, 150), (255, 255, 255), -1)
+cv2.circle(img, (200, 200), 30, (255, 255, 255), -1)
+
+cv2.imwrite("sample_image.jpg", img)
+
+image = cv2.imread("sample_image.jpg")
+
+cv2.imshow("Original Image", image)
+
+kernel = np.ones((5, 5), np.uint8)
+
+dilated = cv2.dilate(image, kernel, iterations=1)
+
+cv2.imshow("Dilated Image", dilated)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
