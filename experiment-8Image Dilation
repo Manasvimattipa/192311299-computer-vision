@@ -2,25 +2,13 @@
 import cv2
 import numpy as np
 
-img = np.zeros((400, 400), dtype=np.uint8)
+image = cv2.imread(r"C:\Users\hp\Downloads\cat.png", 0)
 
-cv2.putText(img, "HELLO", (60, 100),
-            cv2.FONT_HERSHEY_SIMPLEX, 1.5, 255, 4)
-
-cv2.rectangle(img, (60, 150), (160, 250), 255, -1)
-
-cv2.circle(img, (280, 200), 50, 255, -1)
-
-pts = np.array([[200, 300], [300, 300], [250, 220]], np.int32)
-cv2.fillPoly(img, [pts], 255)
-
-cv2.imwrite("original_image.png", img)
-
-image = cv2.imread("original_image.png", 0)
+image = cv2.resize(image, (400, 300))
 
 cv2.imshow("Original Image", image)
 
-kernel = np.ones((15, 15), np.uint8)
+kernel = np.ones((5, 5), np.uint8)
 
 dilated = cv2.dilate(image, kernel, iterations=2)
 
