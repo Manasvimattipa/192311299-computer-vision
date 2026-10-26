@@ -1,0 +1,27 @@
+
+import cv2
+import numpy as np
+
+img = np.zeros((300, 300, 3), dtype=np.uint8)
+
+cv2.rectangle(img, (40, 40), (130, 130), (0, 255, 0), -1)
+cv2.circle(img, (220, 90), 45, (255, 0, 0), -1)
+cv2.rectangle(img, (80, 180), (220, 260), (0, 0, 255), -1)
+
+cv2.putText(img, "IMAGE", (90, 160),
+            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
+
+cv2.imwrite("original_image.jpg", img)
+
+image = cv2.imread("original_image.jpg")
+
+cv2.imshow("Original Image", image)
+
+bigger = cv2.resize(image, (600, 600), interpolation=cv2.INTER_LINEAR)
+cv2.imshow("Bigger Image", bigger)
+
+smaller = cv2.resize(image, (150, 150), interpolation=cv2.INTER_AREA)
+cv2.imshow("Smaller Image", smaller)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
