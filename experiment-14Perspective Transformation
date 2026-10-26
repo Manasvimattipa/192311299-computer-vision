@@ -1,0 +1,32 @@
+
+import cv2
+import numpy as np
+
+image = cv2.imread(r"C:\Users\hp\Downloads\cat.png")
+
+image = cv2.resize(image, (400, 300))
+
+cv2.imshow("Original Image", image)
+
+pts1 = np.float32([
+    [50, 50],
+    [350, 50],
+    [50, 250],
+    [350, 250]
+])
+
+pts2 = np.float32([
+    [100, 50],
+    [300, 50],
+    [50, 250],
+    [350, 250]
+])
+
+matrix = cv2.getPerspectiveTransform(pts1, pts2)
+
+transformed = cv2.warpPerspective(image, matrix, (400, 300))
+
+cv2.imshow("Perspective Transformed Image", transformed)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
