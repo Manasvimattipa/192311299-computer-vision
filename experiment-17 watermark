@@ -1,0 +1,23 @@
+
+import cv2
+
+image = cv2.imread(r"C:\Users\hp\Downloads\cat.png")
+
+image = cv2.resize(image, (400, 300))
+
+cv2.imshow("Original Image", image)
+
+watermark = image.copy()
+
+cv2.putText(watermark, "MY WATERMARK", (30, 270),
+            cv2.FONT_HERSHEY_SIMPLEX, 0.8,
+            (0, 0, 255), 3)
+
+result = cv2.addWeighted(image, 0.6, watermark, 0.4, 0)
+
+cv2.imshow("Watermarked Image", result)
+
+cv2.imwrite("watermarked_image.png", result)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
