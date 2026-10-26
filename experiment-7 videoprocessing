@@ -1,0 +1,60 @@
+
+import cv2
+import numpy as np
+
+width, height = 640, 480
+fps = 20
+
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+out = cv2.VideoWriter('sample_video.avi', fourcc, fps, (width, height))
+
+for i in range(100):
+    frame = np.zeros((height, width, 3), dtype=np.uint8)
+
+    x = 50 + (i * 5) % 540
+    y = 240
+
+    cv2.circle(frame, (x, y), 30, (0, 255, 0), -1)
+    cv2.putText(frame, "Sample Video", (200, 50),
+                cv2.FONT_HERSHEY_SIMPLEX, 1,
+                (255, 255, 255), 2)
+
+    out.write(frame)
+
+out.release()
+
+print("Sample video created successfully!")
+
+def play_video(title, delay, skip):
+
+    cap = cv2.VideoCapture('sample_video.avi')
+
+    print("Playing:", title)
+
+    while True:
+        ret, frame = cap.read()
+
+        if not ret:
+            break
+
+        cv2.imshow(title, frame)
+
+        key = cv2.waitKey(delay) & 0xFF
+
+        if key == ord('q'):
+            break
+
+        if skip > 0:
+            for i in range(skip):
+                cap.read()
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+play_video("Original Video", 50, 0)
+
+play_video("Slow Motion Video", 150, 0)
+
+play_video("Fast Motion Video", 1, 2)
+
+cv2.destroyAllWindows()
