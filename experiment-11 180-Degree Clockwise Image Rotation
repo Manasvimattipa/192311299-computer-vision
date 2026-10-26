@@ -1,0 +1,15 @@
+
+import cv2
+
+image = cv2.imread(r"C:\Users\hp\Downloads\cat.png")
+
+image = cv2.resize(image, (400, 300))
+
+cv2.imshow("Original Image", image)
+
+rotated = cv2.rotate(image, cv2.ROTATE_180)
+
+cv2.imshow("180 Degree Rotated Image", rotated)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
